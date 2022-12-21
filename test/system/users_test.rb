@@ -1,0 +1,57 @@
+require "application_system_test_case"
+
+class UsersTest < ApplicationSystemTestCase
+  setup do
+    @user = users(:admin)
+    @myrole = 'admin'
+    @email = '0@gmail.com'
+    @password = "0"
+    visit '/login'
+    fill_in "email", with: @email
+    fill_in "password", with: @password
+
+    click_on "Submit"
+    assert_selector "h1", text: "Main Page of LAZADAE"
+  end
+
+  test "visiting the index" do
+    visit users_url
+    assert_selector "h1", text: "Users"
+  end
+
+  test "should create user" do
+    visit users_url
+    click_on "New user"
+
+    fill_in "Email", with: "new@gmail.com"
+    fill_in "Name", with: @user.name
+    fill_in "Password", with: @user.password_digest
+    fill_in "User type", with: @user.user_type
+    click_on "Create User"
+
+    assert_text "User was successfully created"
+    click_on "Back to users"
+  end
+
+  test "should update User" do
+    visit user_url(@user)
+    click_on "Edit this user", match: :first
+
+    fill_in "Email", with: @user.email
+    fill_in "Name", with: @user.name
+    # fill_in "Password", with: @user.password_digest
+    fill_in "User type", with: @user.user_type
+    click_on "Update User"
+
+    assert_text "User was successfully updated"
+    click_on "Back to users"
+  end
+
+  test "should destroy User" do
+    @user = users(:buyer)
+    visit user_url(@user)
+    click_on "Destroy this user", match: :first
+
+    assert_text "User was successfully destroyed"
+  end
+end

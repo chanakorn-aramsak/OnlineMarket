@@ -1,0 +1,39 @@
+
+<p> role: <%= @myrole %> </p>
+<div>
+  <%# <%= link_to "Show this item", @item, class:"btn btn-info" %> 
+  <%= link_to "Profile", '/profile', class:"btn btn-dark" %>
+
+  <% if (@myrole == 'admin' || @myrole == 'buyer') %>
+    <%= link_to "My Market", '/my_market ', class:"btn btn-dark" %>
+  <% end %>
+
+  <% if (@myrole == 'admin' || @myrole == 'buyer') %>
+    <%= link_to "Purchase History", '/purchase_history ', class:"btn btn-dark" %>
+  <% end %>
+
+  <% if (@myrole == 'admin' || @myrole == 'seller') %>
+    <%= link_to "My Inventory", '/my_inventory ', class:"btn btn-dark" %>
+  <% end %>
+
+  <% if (@myrole == 'admin' || @myrole == 'seller') %>
+    <%= link_to "Sale History", '/sale_history ', class:"btn btn-dark" %>
+  <% end %>
+
+  <% if (@myrole == 'admin' || @myrole == 'seller') %>
+    <%= link_to "Top Seller", '/top_seller ', class:"btn btn-dark" %>
+  <% end %>
+</div>
+
+<div>
+  <br><br>
+  <% if (@myrole == 'admin') %>
+    <%= link_to "Users", '/users ', class:"btn btn-primary" %>
+    <%= link_to "Items", '/items ', class:"btn btn-primary" %>
+  <% end %>
+</div>
+
+<div>
+  <br><br>
+  <%= link_to "Log Out", '/login/destroy', class:"btn btn-secondary" %>
+</div>

@@ -1,0 +1,21 @@
+<div id="<%= dom_id item %>">
+  <p>
+    <strong>Name:</strong>
+    <%= item.name %>
+  </p>
+
+  <p>
+    <strong>Category:</strong>
+    <%= item.category %>
+  </p>
+
+  <p>
+    <strong>Enable:</strong>
+    <%= item.enable %>
+  </p>
+  
+  <% if(item.picture.attached?) %>
+    <%= image_tag item.picture.variant(:thumb) %>
+  <%end%>
+
+</div>

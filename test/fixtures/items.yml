@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  category: MyString
-  enable: false
+  name: "oneItem"
+  category: "one"
+  enable: true
+  lock_version: 0
 
 two:
-  name: MyString
-  category: MyString
+  name: "twoItem"
+  category: "one"
   enable: false
+  lock_version: 0

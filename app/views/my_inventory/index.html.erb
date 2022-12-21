@@ -1,0 +1,63 @@
+<h1> My Inventory Page </h1>
+
+<p> User ID: <%= @user_id %> </p>
+
+<table class="table", id='invent'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Picture</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Enable</th>
+            <th> </th>
+        </tr>
+    </thead>
+  
+    <tbody>
+    <div id="items">
+        <% @myItem.each do |item| %>
+            <tr>
+                <td> <%= Item.find(item.item_id).name %></td>
+                <td> 
+                    <% if Item.find(item.item_id).picture.attached? %> 
+                        <%= image_tag Item.find(item.item_id).picture.variant(:thumb) %>
+                    <% end %>
+                </td>
+                <td> <%= Item.find(item.item_id).category %> </td>
+                <td> <%= item.price %> </td>
+                <td> <%= item.stock %> </td>
+                <% if (Item.find(item.item_id).enable == true) %>
+                    <td> Approve for sell </td>
+                <% else %>
+                    <td> Pending... </td>
+                <% end %>
+                <td>
+                    <%= link_to "Edit", "/markets/#{item.id}/edit", class:"btn btn-info" %>
+                    <%= link_to "Delete", "/my_inventory/destroy_item/#{item.item_id}", class:"btn btn-danger" %>
+                </td>
+            </tr>
+        <% end %>
+    </div>
+    </tbody>
+</table>
+
+<%= link_to "New Items", "/items/new", class:"btn btn-success" %>
+<br><br>
+<p>When you create item, its status is as 'unenable'. You must waiting for "Admin" for approving your items.</P>
+<p>If the admin approve your item (enable), you can sell it!</p>
+<br>
+<%= link_to "Back to MAIN page", '/main', class:"btn btn-primary" %>
+
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+
+<script> 
+    $(document).ready( function () {
+       $('#invent').DataTable();
+    });
+</script>

@@ -1,0 +1,76 @@
+<h1>Sign Up</h1>
+<style>
+  form {
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .actions {
+    text-align: right;
+  }
+
+  .alert {
+    background-color: #f44336;
+    color: white;
+    padding: 12px;
+    margin-bottom: 20px;
+  }
+</style>
+
+<%= form_with url: "/register/create", method: "post", data:{turbo: false} do|f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% if flash[:alert] %>
+  <div class="alert"><%= flash[:alert] %></div>
+<% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.label :user_type %><br>
+    <%= f.select :user_type, options_for_select(["admin", "buyer", "seller"]) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

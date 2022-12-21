@@ -1,13 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: MyString
-  item_id: MyString
-  price: 1
-  stock: 1
+  user_id: 991613951
+  item_id: 980190962
+  price: 1.5
+  stock: 10
+  lock_version: 0
 
 two:
-  user_id: MyString
-  item_id: MyString
-  price: 1
-  stock: 1
+  user_id: 991613951
+  item_id: 298486374
+  price: 2.5
+  stock: 20
+  lock_version: 0

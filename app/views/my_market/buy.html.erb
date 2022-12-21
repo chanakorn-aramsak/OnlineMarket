@@ -1,0 +1,7 @@
+<% if (@success) %>
+    <div> <h3> Completely add to Cart </h3> </div>
+<% else %>
+    <div> <h3> [Can not add to Cart.] Insufficient amount of goods </h3> </div>
+<% end %>
+
+<%= link_to "Back", '/my_market', class:"btn btn-info" %>

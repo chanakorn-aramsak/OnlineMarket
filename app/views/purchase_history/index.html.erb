@@ -1,0 +1,49 @@
+<h1>Purchase History</h1>
+
+<p> User ID: <%= session[:user_id] %> </p>
+
+<table class="table", id='purchase'>
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Category</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Seller's name</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+    <div id="items">
+        <% @myItem.each do |item| %>
+            <tr>
+                <td> <%= Item.find(item.item_id).name %></td>
+                <td> <%= Item.find(item.item_id).category %></td>
+                <td> <%= item.price %></td>
+                <td> <%= item.qty %></td>
+                <td> <%= item.price*item.qty %></td>
+                <td> <%= User.find(item.seller_id).name %></td>
+                <td> <%= item.created_at.localtime %></td>
+            </tr>
+        <% end %>
+    </div>
+    </tbody>
+
+</table>
+
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+
+<br><br>
+<%= link_to "Back to MAIN page", '/main', class:"btn btn-primary" %>
+
+<script> 
+    $(document).ready( function () {
+       $('#purchase').DataTable();
+    });
+</script>

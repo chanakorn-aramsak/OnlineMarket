@@ -1,0 +1,28 @@
+<h1>Profile</h1>
+
+<p> <b>User_id:</b> <%= @user_id %> </p>
+<p> <b>Email:</b> <%= @email %> </p>
+<p> <b>Name:</b> <%= @name %> </p>
+<% if (@user_type == 0) %>
+    <p> <b>Role:</b> Admin</p>
+<% elsif (@user_type == 1) %>
+    <p> <b>Role:</b> Seller</p>
+<% else %>
+    <p> <b>Role:</b> Buyer</p>
+<% end %>
+
+<br><br>
+<p> <b>Changing password</b> </p>
+
+<%= form_with url: "/profile/changePassword", method: :get do |form| %>
+    <%= form.hidden_field :lock_version, value: @myUser.lock_version %>
+    <div>
+        <%= form.label :enter_new_password, style: "display: block" %>
+        <%= form.text_field :password, :required => true%>
+    </div>
+    <br>
+    <%= form.submit %>
+<% end %>
+
+<br><br>
+<%= link_to "Back to MAIN page", '/main', class:"btn btn-primary" %>

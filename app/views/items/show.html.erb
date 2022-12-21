@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @item %>
+
+<div>
+  <%= link_to "Edit this item", edit_item_path(@item) %> |
+  <%= link_to "Back to Inventory", '/my_inventory', class:"btn btn-info" %>
+
+  <% if (@myrole == 'admin') %>
+    <%= link_to "Back to items", items_path, class:"btn btn-info" %>
+    <%= button_to "Destroy this item", @item, method: :delete %>
+  <% end %>
+</div>
+
+<br><br>
+<%= link_to "Back to MAIN", '/main', class:"btn btn-info" %>

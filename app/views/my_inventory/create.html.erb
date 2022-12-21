@@ -1,0 +1,43 @@
+<h1> Create Item for Inventory (Not used 2) </h1>
+<!-- /my_inventory/newItem -->
+<%= form_with(model: @item, url: "/items/create", method: :get) do |form| %>
+    <%= form.hidden_field :lock_version %>
+    <%= form.hidden_field :enable, value: false %>
+    <div>
+        <%= form.label :name, style: "display: block" %>
+        <%= form.text_field :name %>
+    </div>
+
+    <div>
+        <%= form.label :category, style: "display: block" %>
+        <%= form.text_field :category %>
+    </div>
+
+    <div>
+        <%= form.label :price, style: "display: block" %>
+        <%= form.text_field :price %>
+    </div>
+
+    <div>
+        <%= form.label :stock, style: "display: block" %>
+        <%= form.number_field :stock %>
+    </div>
+
+    <div>
+        <%= form.label :picture, style: "display: block", class:"form-label" %>
+        <%= form.file_field :picture, class:"form-control" , id:"inputGroupFile01" %>
+    </div>
+
+    <br>
+    <% if (@editing)  %>
+        <% if(item.picture.attached?) %>
+        <%= image_tag item.picture.variant(:thumb) %>
+        <%end%>
+    <% end %>
+    <br>
+    <br>
+
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>

@@ -1,0 +1,84 @@
+<h1>Top Seller</h1>
+
+<%= form_with url: "/top_seller/calculate", method: :get do |form| %>
+    <%= form.hidden_field :start_date%> start date:
+    <%= form.date_field :start_date, :required => true %>
+    &ensp; &ensp; &ensp; &ensp; &ensp;
+    <%= form.hidden_field :end_date%> end date:
+    <%= form.date_field :end_date, :required => true %>
+    &ensp; &ensp; &ensp; &ensp; &ensp;
+    <%= form.submit "search", class:"btn btn-info" %> 
+<% end %>
+
+<% if (@status == 'ok') %>
+    <h3> Top seller sorted by 'Sold amount' between <%= @start_date %> and <%= @end_date %> </h3>
+    <table id='top1'>
+        <thead>
+            <tr>
+                <th>Seller ID</th>
+                <th>Seller Name</th>
+                <th>Seller Email</th>
+                <th>Sold amount</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <div id="items">
+                <% @seller_qty.each do |itemm| %>
+                    <tr>
+                        <td> <%= itemm.seller_id %> </td>
+                        <td> <%= User.find(itemm.seller_id).name %> </td>
+                        <td> <%= User.find(itemm.seller_id).email %> </td>
+                        <td> <%= itemm.qtyy %> </td>
+                    </tr>
+                <% end %>
+            </div>
+        </tbody>
+    </table>
+    <br><br>
+    <h3> Top seller sorted by 'The highest total sales' between <%= @start_date %> and <%= @end_date %> </h3>
+    <table id='top2'">
+        <thead>
+            <tr>
+                <th>Seller ID</th>
+                <th>Seller Name</th>
+                <th>Seller Email</th>
+                <th>Total sales</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <div id="items">
+                <% @seller_totalPrice.each do |itemm| %>
+                    <tr>
+                        <td> <%= itemm.seller_id %> </td>
+                        <td> <%= User.find(itemm.seller_id).name %> </td>
+                        <td> <%= User.find(itemm.seller_id).email %> </td>
+                        <td> <%= itemm.qtyy %> </td>
+                    </tr>
+                <% end %>
+            </div>
+        </tbody>
+    </table>
+<% elsif (@status == 'error') %>
+    <h3> Please enter the valid date </h3>
+<% end %>
+
+<br><br>
+<%= link_to "Back to MAIN page", '/main', class:"btn btn-primary" %>
+
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+
+<script> 
+    $(document).ready( function () {
+       $('#top1').DataTable();
+    });
+
+    $(document).ready( function () {
+       $('#top2').DataTable();
+    });
+</script>

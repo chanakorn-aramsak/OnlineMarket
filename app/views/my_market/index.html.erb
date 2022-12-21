@@ -1,0 +1,55 @@
+<h1> My Market Page </h1>
+
+<p> User ID: <%= @user_id %> </p>
+
+<table id='myMarket_table'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Picture</th>
+            <th>Price</th>
+            <th>Current Stock</th>
+            <th><b>Buying</b></th>
+        </tr>
+    </thead>
+  
+    <tbody>
+        <% @myItem.each do |item| %>
+            <tr>
+                <td> <%= item.name %> </td>
+                <td> <%= item.category %> </td>
+                <td> 
+                    <% if item.picture.attached? %> 
+                        <%= image_tag item.picture.variant(:thumb) %>
+                    <% end %>
+                </td>
+                <td> <%= Market.where(item_id: item.id).first.price %> </td>
+                <td> <%= Market.where(item_id: item.id).first.stock %> </td>
+                <td>
+                    <%= form_with url: "/my_market/buy", method: :get do |form| %>
+                        <%= form.hidden_field :item_id, value: item.id %>
+                        <%= form.number_field :buying, :required => true, min: 1 %>
+                        <%= form.submit "BUY", class:"btn btn-info" %> 
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+
+</table>
+
+<br><br>
+<%= link_to "Back to MAIN page", '/main', class:"btn btn-primary" %>
+
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+
+<script> 
+    $(document).ready( function () {
+       $('#myMarket_table').DataTable();
+    });
+</script>
