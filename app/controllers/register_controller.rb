@@ -4,7 +4,16 @@ class RegisterController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
+        case params[:user_type]
+            when 'admin'
+            user_type = 0
+            when 'seller'
+            user_type = 1
+            when 'buyer'
+            user_type = 2
+            end
+        @user = User.new(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], user_type: user_type)
+        
         if @user.password == @user.password_confirmation
             if @user.valid?
             # Handle successful user creation
@@ -25,6 +34,7 @@ class RegisterController < ApplicationController
   private
 
   def user_params
+    
     params.permit(:name, :email, :password, :password_confirmation, :user_type)
   end
 end
